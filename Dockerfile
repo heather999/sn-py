@@ -44,9 +44,11 @@ RUN yum clean -y all && \
     cd /tmp && \
     git clone https://github.com/heather999/sn-py && \
     cd sn-py/conda && \
-    bash install-sn-py.sh /usr/local/py3.7 sn-py-env.yml NERSC && \
+    bash install-sn-py.sh /usr/local/py3.7 sn-py-env-nersc-install-nobuildinfo.yml NERSC && \
     cd /tmp && \
     rm -Rf sn-py
     
 ENV HDF5_USE_FILE_LOCKING FALSE
 ENV PYTHONSTARTUP ''
+
+ENV PATH="/usr/local/py3.7/bin:${PATH}"
