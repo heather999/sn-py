@@ -44,11 +44,35 @@ RUN yum clean -y all && \
     cd /tmp && \
     git clone https://github.com/heather999/sn-py && \
     cd sn-py/conda && \
-    bash install-sn-py.sh /usr/local/py3.7 sn-py-env-nersc-install-nobuildinfo.yml NERSC && \
+    bash install-sn-py.sh /usr/local/py3 sn-py-env.yml && \
     cd /tmp && \
     rm -Rf sn-py
+    
+    
+ENV SNANA_DIR /usr/local/snana/SNANA-10_78c
+ENV SNANA_ROOT /usr/local/snana/SNDATA_ROOT
+ENV CFITSIO_DIR /usr/local/py3/envs/sn-env
+ENV GSL_DIR /usr/local/py3/envs/sn-env
+ENV ROOT_DIR /usr/local/py3/envs/sn-env
+ENV PATH="${SNANA_DIR}/bin:${SNANA_DIR}/util:${PATH}"
+
+# SNANA
+RUN mkdir /usr/local/snana && \
+    cd /usr/local/snana && \
+    curl -LO  https://github.com/RickKessler/SNANA/archive/v10_78c.tar.gz && \
+    tar xvzf v10_78c.tar.gz && \
+    mkdir SNDATA_ROOT && \
+    cd SNDATA_ROOT && \
+    curl -LO https://zenodo.org/record/4015325/files/SNDATA_ROOT_2020-09-04.tar.gz && \
+    tar xvzf SNDATA_ROOT_2020-09-04.tar.gz && \
+    cd .. && \
+    cd $SNANA_DIR/src && \
+    sed '/SNCFLAGS  =/ s/$/ -std=c++1z/' Makefile && \
+    /bin/bash -c 'source /usr/local/py3/etc/profile.d/conda.sh; \
+    source activate sn-env; \
+    make; \'
     
 ENV HDF5_USE_FILE_LOCKING FALSE
 ENV PYTHONSTARTUP ''
 
-ENV PATH="/usr/local/py3.7/bin:${PATH}"
+ENV PATH="/usr/local/py3/bin:${PATH}"
