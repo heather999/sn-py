@@ -68,7 +68,9 @@ RUN mkdir /usr/local/snana && \
     cd .. && \
     cd $SNANA_DIR/src && \
     sed '/SNCFLAGS  =/ s/$/ -std=c++1z/' Makefile && \
-    make 
+    /bin/bash -c 'source /usr/local/py3/etc/profile.d/conda.sh; \
+    source activate sn-env; \
+    make; \'
     
 ENV HDF5_USE_FILE_LOCKING FALSE
 ENV PYTHONSTARTUP ''
