@@ -67,7 +67,9 @@ RUN mkdir /usr/local/snana && \
     tar xvzf SNDATA_ROOT_2020-09-04.tar.gz && \
     cd .. && \
     cd $SNANA_DIR/src && \
-    sed '/SNCFLAGS  =/ s/$/ -std=c++1z/' Makefile && \
+    sed '/SNCFLAGS  =/ s/$/ -std=c++1z/' Makefile > Makefile2 && \
+    rm Makefile && \
+    mv Makefile2 Makefile && \
     /bin/bash -c 'source /usr/local/py3/etc/profile.d/conda.sh; \
     source activate sn-env; \
     make; \'
