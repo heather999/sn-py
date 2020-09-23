@@ -72,7 +72,7 @@ RUN mkdir /usr/local/snana && \
     mv Makefile2 Makefile && \
     /bin/bash -c 'source /usr/local/py3/etc/profile.d/conda.sh; \
     source activate sn-env; \
-    make; \'
+    make -i; \'
     
 ENV HDF5_USE_FILE_LOCKING FALSE
 ENV PYTHONSTARTUP ''
