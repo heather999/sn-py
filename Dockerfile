@@ -44,9 +44,7 @@ RUN yum clean -y all && \
     cd /tmp && \
     git clone https://github.com/heather999/sn-py && \
     cd sn-py/conda && \
-    bash install-sn-py.sh /usr/local/py3 sn-py-env.yml && \
-    cd /tmp && \
-    rm -Rf sn-py
+    bash install-sn-py.sh /usr/local/py3 sn-py-env.yml 
     
     
 ENV SNANA_DIR /usr/local/snana/SNANA-10_78c
@@ -67,13 +65,17 @@ RUN mkdir /usr/local/snana && \
     tar xvzf SNDATA_ROOT_2020-09-04.tar.gz && \
     cd .. && \
     cd $SNANA_DIR/src && \
+    cp /tmp/sn-py/snana/Makefile . && \
     sed '/SNCFLAGS  =/ s/$/ -std=c++1z/' Makefile > Makefile2 && \
     rm Makefile && \
     mv Makefile2 Makefile && \
-    cat Makefile
-#    /bin/bash -c 'source /usr/local/py3/etc/profile.d/conda.sh; \
-#    source activate sn-env; \
-#    make -i; \'
+    cat Makefile && \
+    /bin/bash -c 'source /usr/local/py3/etc/profile.d/conda.sh; \
+    source activate sn-env; \
+    make -i; \'
+
+RUN cd /tmp && \
+    rm -Rf sn-py
     
 ENV HDF5_USE_FILE_LOCKING FALSE
 ENV PYTHONSTARTUP ''
