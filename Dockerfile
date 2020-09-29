@@ -85,4 +85,4 @@ ENV PYTHONSTARTUP ''
 
 ENV PATH="/usr/local/py3/bin:${PATH}"
 
-CMD ["source", "/usr/local/py3/sn-env-setup.sh"]
+CMD ["/bin/bash", "-c", "source", "/usr/local/py3/sn-env-setup.sh"]
