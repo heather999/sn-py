@@ -71,7 +71,7 @@ RUN mkdir /usr/local/snana && \
     cat Makefile && \
     /bin/bash -c 'source /usr/local/py3/etc/profile.d/conda.sh; \
     source activate sn-env; \
-    make all; \'
+    make -i all; \'
 
 RUN cd /tmp && \
     rm -Rf sn-py
