@@ -44,7 +44,8 @@ RUN yum clean -y all && \
     cd /tmp && \
     git clone https://github.com/heather999/sn-py && \
     cd sn-py/conda && \
-    bash install-sn-py.sh /usr/local/py3 sn-py-env.yml 
+    bash install-sn-py.sh /usr/local/py3 sn-py-env.yml && \
+    cp sn-env-setup.sh /usr/local/py3
     
     
 ENV SNANA_DIR /usr/local/snana/SNANA-10_78c
@@ -83,3 +84,5 @@ ENV HDF5_USE_FILE_LOCKING FALSE
 ENV PYTHONSTARTUP ''
 
 ENV PATH="/usr/local/py3/bin:${PATH}"
+
+CMD ["source", "/usr/local/py3/sn-env-setup.sh"]
