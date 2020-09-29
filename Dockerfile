@@ -70,11 +70,11 @@ RUN mkdir /usr/local/snana && \
     cp /tmp/sn-py/snana/Makefile . && \
     cat Makefile && \
     /bin/bash -c 'source /usr/local/py3/etc/profile.d/conda.sh; \
-    source activate sn-env; \
+    conda activate sn-env; \
     which gcc; \
     which c++; \
     c++ --help; \
-    make -i all; \'
+    make all; \'
 
 RUN cd /tmp && \
     rm -Rf sn-py
