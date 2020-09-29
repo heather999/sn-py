@@ -51,10 +51,12 @@ RUN yum clean -y all && \
 ENV SNANA_DIR /usr/local/snana/SNANA-10_78c
 ENV SNANA_ROOT /usr/local/snana/SNDATA_ROOT
 ENV SNDATA_ROOT /usr/local/snana/SNDATA_ROOT
-ENV CFITSIO_DIR /usr/local/py3/envs/sn-env
-ENV GSL_DIR /usr/local/py3/envs/sn-env
-ENV ROOT_DIR /usr/local/py3/envs/sn-env
+ENV CFITSIO_DIR /usr/local/py3                                   #/envs/sn-env
+ENV GSL_DIR /usr/local/py3                                       #/envs/sn-env
+ENV ROOT_DIR /usr/local/py3                                      #/envs/sn-env
 ENV PATH="${SNANA_DIR}/bin:${SNANA_DIR}/util:${PATH}"
+
+#    conda activate sn-env; \
 
 # SNANA
 RUN mkdir /usr/local/snana && \
@@ -71,10 +73,6 @@ RUN mkdir /usr/local/snana && \
     cp /tmp/sn-py/snana/Makefile . && \
     cat Makefile && \
     /bin/bash -c 'source /usr/local/py3/etc/profile.d/conda.sh; \
-    conda activate sn-env; \
-    which gcc; \
-    which c++; \
-    c++ --help; \
     make all; \'
 
 RUN cd /tmp && \
@@ -85,4 +83,4 @@ ENV PYTHONSTARTUP ''
 
 ENV PATH="/usr/local/py3/bin:${PATH}"
 
-CMD ["/bin/bash -c", "source", "/usr/local/py3/sn-env-setup.sh"]
+#CMD ["/bin/bash -c", "source", "/usr/local/py3/sn-env-setup.sh"]
