@@ -51,9 +51,12 @@ RUN yum clean -y all && \
 ENV SNANA_DIR /usr/local/snana/SNANA-10_78c
 ENV SNANA_ROOT /usr/local/snana/SNDATA_ROOT
 ENV SNDATA_ROOT /usr/local/snana/SNDATA_ROOT
-ENV CFITSIO_DIR /usr/local/py3                                   #/envs/sn-env
-ENV GSL_DIR /usr/local/py3                                       #/envs/sn-env
-ENV ROOT_DIR /usr/local/py3                                      #/envs/sn-env
+ENV CFITSIO_DIR /usr/local/py3
+ENV GSL_DIR /usr/local/py3
+ENV ROOT_DIR /usr/local/py3
+#ENV CFITSIO_DIR /usr/local/py3                                   #/envs/sn-env
+#ENV GSL_DIR /usr/local/py3                                       #/envs/sn-env
+#ENV ROOT_DIR /usr/local/py3                                      #/envs/sn-env
 ENV PATH="${SNANA_DIR}/bin:${SNANA_DIR}/util:${PATH}"
 
 #    conda activate sn-env; \
