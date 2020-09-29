@@ -22,10 +22,11 @@ which python
 export PATH=$1/bin:$PATH
 which python
 
-conda env create -n sn-env -f $2
+conda env update --name base --file $2
+#conda env create -n sn-env -f $2
 
 source $1/etc/profile.d/conda.sh
-conda activate sn-env
+#conda activate sn-env
 
 # Install jupyterlab at CC
 if [[ -z $3 ]]
