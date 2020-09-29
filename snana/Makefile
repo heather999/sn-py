@@ -894,7 +894,7 @@ $(OBJ)/kdtree.o : $(SRC)/kdtree.c $(SRC)/kdtree.h
 
 $(OBJ)/sntools_output.o : $(SNTOOLS_OUTPUT)
 	(cd $(OBJ); \
-	$(CCoutput) $(SNCFLAGS) $(CXXFLAGS) $(IROOT) $(ICFITSIO) $(SRC)/sntools_output.c )
+	$(CCoutput) $(CXXFLAGS) $(SNCFLAGS) $(IROOT) $(ICFITSIO) $(SRC)/sntools_output.c )
 
 # -------------------------------------------------
 #   MWgaldust from D.Cinabro (.o only)
