@@ -49,6 +49,7 @@ RUN yum clean -y all && \
     
 ENV SNANA_DIR /usr/local/snana/SNANA-10_78c
 ENV SNANA_ROOT /usr/local/snana/SNDATA_ROOT
+ENV SNDATA_ROOT /usr/local/snana/SNDATA_ROOT
 ENV CFITSIO_DIR /usr/local/py3/envs/sn-env
 ENV GSL_DIR /usr/local/py3/envs/sn-env
 ENV ROOT_DIR /usr/local/py3/envs/sn-env
@@ -59,8 +60,8 @@ RUN mkdir /usr/local/snana && \
     cd /usr/local/snana && \
     curl -LO  https://github.com/RickKessler/SNANA/archive/v10_78c.tar.gz && \
     tar xvzf v10_78c.tar.gz && \
-    mkdir SNDATA_ROOT && \
-    cd SNDATA_ROOT && \
+    mkdir -p $SNDATA_ROOT && \
+    cd $SNDATA_ROOT && \
     curl -LO https://zenodo.org/record/4015325/files/SNDATA_ROOT_2020-09-04.tar.gz && \
     tar xvzf SNDATA_ROOT_2020-09-04.tar.gz && \
     cd .. && \
@@ -70,7 +71,7 @@ RUN mkdir /usr/local/snana && \
     cat Makefile && \
     /bin/bash -c 'source /usr/local/py3/etc/profile.d/conda.sh; \
     source activate sn-env; \
-    make -i; \'
+    make all; \'
 
 RUN cd /tmp && \
     rm -Rf sn-py
