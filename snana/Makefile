@@ -217,6 +217,7 @@ ifeq ($(USE_ROOT),0)
 else
    CCoutput    = c++ 
    CPPLIB      = -lstdc++
+   CXXFLAGS    = -std=c++17
    IROOT       = -I/$(ROOT_DIR)/include -I/opt/local/include/freetype2
    ROOT_LIBDIR = $(LIB_SDIR)
    ROOT_LIBDIR = lib
@@ -454,7 +455,7 @@ makeDirs:
 # fcasplit (April 2014)
 
 $(OBJ)/fcasplit.o : $(SRC)/fcasplit.F
-	(cd $(OBJ);  $(FFC)  $(SNFFLAGS) $(SRC)/fcasplit.F ) 
+	(cd $(OBJ);  $(FFC)  $(SNCFLAGS) $(SRC)/fcasplit.F ) 
 
 $(BIN)/fcasplit : $(OBJ)/fcasplit.o 
 	$(FFC) -o  $@ $(SNLDFLAGS) \
@@ -893,7 +894,7 @@ $(OBJ)/kdtree.o : $(SRC)/kdtree.c $(SRC)/kdtree.h
 
 $(OBJ)/sntools_output.o : $(SNTOOLS_OUTPUT)
 	(cd $(OBJ); \
-	$(CCoutput) $(SNCFLAGS) $(IROOT) $(ICFITSIO) $(SRC)/sntools_output.c )
+	$(CCoutput) $(SNCFLAGS) $(CXXFLAGS) $(IROOT) $(ICFITSIO) $(SRC)/sntools_output.c )
 
 # -------------------------------------------------
 #   MWgaldust from D.Cinabro (.o only)
