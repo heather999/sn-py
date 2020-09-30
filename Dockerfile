@@ -62,28 +62,30 @@ ENV PATH="${SNANA_DIR}/bin:${SNANA_DIR}/util:${PATH}"
 #    conda activate sn-env; \
 
 # SNANA
-#RUN mkdir /usr/local/snana && \
-#    cd /usr/local/snana && \
-#    curl -LO  https://github.com/RickKessler/SNANA/archive/v10_78c.tar.gz && \
-#    tar xvzf v10_78c.tar.gz && \
-#    mkdir -p $SNDATA_ROOT && \
-#    cd $SNDATA_ROOT && \
-#    curl -LO https://zenodo.org/record/4015325/files/SNDATA_ROOT_2020-09-04.tar.gz && \
-#    tar xvzf SNDATA_ROOT_2020-09-04.tar.gz && \
-#    cd .. && \
-#    cd $SNANA_DIR/src && \
-#    mv Makefile Makefile_ORG && \
-#    cp /tmp/sn-py/snana/Makefile . && \
-#    cat Makefile && \
-#    /bin/bash -c 'source /usr/local/py3/etc/profile.d/conda.sh; \
-#    make all; \'
+RUN mkdir /usr/local/snana && \
+    cd /usr/local/snana && \
+    curl -LO  https://github.com/RickKessler/SNANA/archive/v10_78c.tar.gz && \
+    tar xvzf v10_78c.tar.gz && \
+    mkdir -p $SNDATA_ROOT && \
+    cd $SNDATA_ROOT && \
+    curl -LO https://zenodo.org/record/4015325/files/SNDATA_ROOT_2020-09-04.tar.gz && \
+    tar xvzf SNDATA_ROOT_2020-09-04.tar.gz && \
+    cd .. && \
+    cd $SNANA_DIR/src && \
+    mv Makefile Makefile_ORG && \
+    cp /tmp/sn-py/snana/Makefile . && \
+    cat Makefile && \
+    /bin/bash -c 'source /usr/local/py3/etc/profile.d/conda.sh; \
+    conda activate base; \
+    which g++; \
+    make all; \'
 
-#RUN cd /tmp && \
-#    rm -Rf sn-py
+RUN cd /tmp && \
+    rm -Rf sn-py
     
 ENV HDF5_USE_FILE_LOCKING FALSE
 ENV PYTHONSTARTUP ''
 
 ENV PATH="/usr/local/py3/bin:${PATH}"
 
-#CMD ["/bin/bash -c", "source", "/usr/local/py3/sn-env-setup.sh"]
+ENTRYPOINT ["/bin/bash", "-c", "source", "/usr/local/py3/etc/profile.d/conda.sh"]
