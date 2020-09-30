@@ -87,4 +87,4 @@ ENV PYTHONSTARTUP ''
 
 ENV PATH="/usr/local/py3/bin:${PATH}"
 
-ENTRYPOINT ["/bin/bash", "-c", "source", "/usr/local/py3/etc/profile.d/conda.sh"]
+CMD ["/bin/bash", "source", "/usr/local/py3/etc/profile.d/conda.sh"]
