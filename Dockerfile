@@ -83,6 +83,6 @@ RUN echo "conda activate sn-env" >> ~/.bashrc
 ENV HDF5_USE_FILE_LOCKING FALSE
 ENV PYTHONSTARTUP ''
 
-#ENV PATH="/usr/local/py3/bin:${PATH}"
+ENV PATH="/usr/local/py3/bin:${PATH}"
 
 CMD ["/bin/bash"]
