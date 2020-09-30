@@ -77,12 +77,16 @@ RUN mkdir /usr/local/snana && \
 RUN cd /tmp && \
     rm -Rf sn-py
     
-RUN echo "source /usr/local/py3/etc/profile.d/conda.sh"
+USER lsst
+    
+RUN echo "source /usr/local/py3/etc/profile.d/conda.sh" >> ~/.bashrc
 RUN echo "conda activate sn-env" >> ~/.bashrc
     
 ENV HDF5_USE_FILE_LOCKING FALSE
 ENV PYTHONSTARTUP ''
 
 ENV PATH="/usr/local/py3/bin:${PATH}"
+
+ENV CONDA_DEFAULT_ENV sn-env
 
 CMD ["/bin/bash"]
