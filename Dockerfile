@@ -76,7 +76,6 @@ RUN mkdir /usr/local/snana && \
     cp /tmp/sn-py/snana/Makefile . && \
     cat Makefile && \
     /bin/bash -c 'source /usr/local/py3/etc/profile.d/conda.sh; \
-    conda activate base; \
     which g++; \
     make all; \'
 
