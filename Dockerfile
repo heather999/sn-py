@@ -35,8 +35,7 @@ RUN yum update -y && \
     sed \
     tar \
     which \
-    zlib-devel \
-    devtoolset-8
+    zlib-devel 
     
 RUN yum clean -y all && \
     rm -rf /var/cache/yum && \
@@ -51,15 +50,10 @@ RUN yum clean -y all && \
 ENV SNANA_DIR /usr/local/snana/SNANA-10_78c
 ENV SNANA_ROOT /usr/local/snana/SNDATA_ROOT
 ENV SNDATA_ROOT /usr/local/snana/SNDATA_ROOT
-ENV CFITSIO_DIR /usr/local/py3
-ENV GSL_DIR /usr/local/py3
-ENV ROOT_DIR /usr/local/py3
-#ENV CFITSIO_DIR /usr/local/py3                                   #/envs/sn-env
-#ENV GSL_DIR /usr/local/py3                                       #/envs/sn-env
-#ENV ROOT_DIR /usr/local/py3                                      #/envs/sn-env
+ENV CFITSIO_DIR /usr/local/py3/envs/sn-env
+ENV GSL_DIR /usr/local/py3/envs/sn-env
+ENV ROOT_DIR /usr/local/py3/envs/sn-env
 ENV PATH="${SNANA_DIR}/bin:${SNANA_DIR}/util:${PATH}"
-
-#    conda activate sn-env; \
 
 # SNANA
 RUN mkdir /usr/local/snana && \
@@ -76,15 +70,19 @@ RUN mkdir /usr/local/snana && \
     cp /tmp/sn-py/snana/Makefile . && \
     cat Makefile && \
     /bin/bash -c 'source /usr/local/py3/etc/profile.d/conda.sh; \
+    conda activate sn-env; \
     which g++; \
     make all; \'
 
 RUN cd /tmp && \
     rm -Rf sn-py
     
+RUN echo "source /usr/local/py3/etc/profile.d/conda.sh"
+RUN echo "conda activate sn-env" >> ~/.bashrc
+    
 ENV HDF5_USE_FILE_LOCKING FALSE
 ENV PYTHONSTARTUP ''
 
-ENV PATH="/usr/local/py3/bin:${PATH}"
+#ENV PATH="/usr/local/py3/bin:${PATH}"
 
-CMD ["/bin/bash", "source", "/usr/local/py3/etc/profile.d/conda.sh"]
+CMD ["/bin/bash"]
